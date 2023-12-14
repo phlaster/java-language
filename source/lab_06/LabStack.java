@@ -1,50 +1,50 @@
-package pkg_06;
+// package source.lab_06;
 
 import java.util.EmptyStackException;
 
 public class LabStack {
     private int maxSize;
     private int[] stackArray;
-    private int top;
+    private int currentSize;
 
     // Конструктор стека
     public LabStack(int size) {
         this.maxSize = size;
         this.stackArray = new int[maxSize];
-        this.top = -1;
+        this.currentSize = 0;
     }
 
     // Добавление элемента в стек
     public void push(int value) {
-        if (top == maxSize - 1) {
-            // Реализуем механизм расширения массива при переполнении
+        if (currentSize == maxSize) {
+            // Расширение статического массива при переполнении стека
             maxSize *= 2;
             int[] newStack = new int[maxSize];
             System.arraycopy(stackArray, 0, newStack, 0, maxSize);
             stackArray = newStack;
         }
-        stackArray[++top] = value;
+        stackArray[currentSize++] = value;
     }
 
     public int pop() {
-        if (top == -1) {
+        if (currentSize == 0) {
             throw new EmptyStackException();
         }
-        return stackArray[top--];
+        return stackArray[currentSize--];
     }
 
     public int peek() {
-        if (top == -1) {
+        if (currentSize == 0) {
             throw new EmptyStackException();
         }
-        return stackArray[top];
+        return stackArray[currentSize];
     }
 
     public boolean isEmpty() {
-        return (top == -1);
+        return (currentSize == 0);
     }
 
     public int size() {
-        return top + 1;
+        return currentSize;
     }
 }
