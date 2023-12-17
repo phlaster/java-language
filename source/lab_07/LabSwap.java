@@ -1,4 +1,4 @@
-package source.lab_07;
+// package source.lab_07;
 
 public class LabSwap {
     private int value;

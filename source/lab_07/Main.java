@@ -1,21 +1,21 @@
-package source.lab_07;
+// package source.lab_07;
 
 public class Main {
     public static void main(String[] args) {
-        LabSwap item1 = new LabSwap(5);
-        LabSwap item2 = new LabSwap(10);
+        LabSwap obj1 = new LabSwap(5);
+        LabSwap obj2 = new LabSwap(10);
 
         System.out.println(
-            "Before exchange: item1 value = " + item1.getValue() +
-            ", item2 value = " + item2.getValue()
+            "Перед обменом: obj1 = " + obj1.getValue() +
+            ", obj2 = " + obj2.getValue()
         );
 
         // Выполняем обмен значений
-        LabSwap.exchangeValues(item1, item2);
+        LabSwap.exchangeValues(obj1, obj2);
 
         System.out.println(
-            "After exchange: item1 value = " + item1.getValue() +
-            ", item2 value = " + item2.getValue()
+            "После обмена: obj1 = " + obj1.getValue() +
+            ", item2 = " + obj2.getValue()
         );
     }
 }
