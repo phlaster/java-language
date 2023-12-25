@@ -1,33 +1,54 @@
 package main.java.com.huffman;
 
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Map;
+import java.io.FileInputStream;
+import java.io.IOException;
 
-public class FreqTable {
+class FreqTable {
     private Map<Byte, Integer> table;
     private int size;
     private int numPaddingBits;
 
-    public FreqTable(String filename) {
-        // Заглушка, реализация будет добавлена позже
-    }
-
-    public FreqTable(InputStream inputStream) {
-        // Заглушка, реализация будет добавлена позже
+    public FreqTable(String filename) throws IOException {
+        FileInputStream inputStream = new FileInputStream(filename);
+        generateFreqTable(inputStream);
+        inputStream.close();
     }
 
     public FreqTable(Map<Byte, Integer> freqTable) {
-        // Заглушка, реализация будет добавлена позже
+        this.table = freqTable;
+        this.size = freqTable.size();
     }
 
-    public void generateFreqTable(InputStream inputStream, Map<Byte, Integer> freqTable, int size) {
-        // Заглушка, реализация будет добавлена позже
+    public Map<Byte, Integer> getTable(){
+        return this.table;
+    }
+
+    private void generateFreqTable(FileInputStream inputStream) throws IOException {
+        table = new HashMap<>();
+        int byteValue;
+        while ((byteValue = inputStream.read()) != -1) {
+            byte byteKey = (byte) byteValue;
+            table.put(byteKey, table.getOrDefault(byteKey, 0) + 1);
+        }
+        size = table.size();
     }
 
     public void print() {
-        // Заглушка, реализация будет добавлена позже
+        System.out.println("Таблица частот встречающихся байтов:");
+        System.out.println("Длина: " + size);
+        System.out.println("ASCII байт  частота");
+        for (Map.Entry<Byte, Integer> entry : table.entrySet()) {
+            byte byteKey = entry.getKey();
+            int freq = entry.getValue();
+            int byteValue = byteKey & 0xFF;
+            if (33 <= byteValue && byteValue <= 126) {
+                System.out.print((char) byteValue + "     ");
+            } else {
+                System.out.print("      ");
+            }
+            System.out.println(byteValue + "   " + freq);
+        }
     }
 }
